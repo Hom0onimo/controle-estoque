@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Compras</title>
+</head>
+<body>
+
+    <h1>Lista de Compras</h1>
+
+    {% for compra in compras %}
+        <p>
+            Comprar: {{ compra.quantidade }} {{ compra.unidade }}
+            de {{ compra.ingrediente }}
+        </p>
+    {% empty %}
+        <p>Nenhum ingrediente precisa ser comprado.</p>
+    {% endfor %}
+
+</body>
+</html>
