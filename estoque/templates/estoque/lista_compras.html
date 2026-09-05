@@ -1,21 +1,60 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Compras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Controle de Estoque</title>
+
+    <link rel="stylesheet" href="{% static 'estoque/style.css' %}">
 </head>
+
 <body>
 
-    <h1>Lista de Compras</h1>
+    <main class="container">
 
-    {% for compra in compras %}
-        <p>
-            Comprar: {{ compra.quantidade }} {{ compra.unidade }}
-            de {{ compra.ingrediente }}
-        </p>
-    {% empty %}
-        <p>Nenhum ingrediente precisa ser comprado.</p>
-    {% endfor %}
+        <header>
+            <h1>Controle de Estoque</h1>
+            <p>Lista de compras para o próximo mês</p>
+        </header>
+
+        <section class="card">
+
+            <h2>Itens para comprar</h2>
+
+            {% if compras %}
+
+                <div class="lista">
+
+                    {% for compra in compras %}
+
+                        <div class="item">
+                            <span>
+                                Comprar:
+                                <strong>{{ compra.quantidade }}</strong>
+                                {{ compra.unidade }}
+                                de
+                                <strong>{{ compra.ingrediente }}</strong>
+                            </span>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p class="vazio">
+                    Nenhum ingrediente precisa ser comprado.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
 
 </body>
 </html>

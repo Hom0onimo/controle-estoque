@@ -48,3 +48,29 @@ class CalculoCompraTest(TestCase):
         resultado = calcular_quantidade_compra(ingrediente)
 
         self.assertEqual(resultado, Decimal("120.00"))
+
+    def test_nao_compra_quando_estoque_e_igual_a_meta(self):
+        ingrediente = Ingrediente(
+            nome="Arroz",
+            unidade="kg",
+            meta=Decimal("10.00"),
+            estoque_atual=Decimal("10.00"),
+            consumo_mes=Decimal("5.00"),
+        )
+
+        resultado = calcular_quantidade_compra(ingrediente)
+
+        self.assertEqual(resultado, Decimal("0.00"))
+
+    def test_nao_compra_quando_estoque_e_maior_que_meta(self):
+        ingrediente = Ingrediente(
+            nome="Feijão",
+            unidade="kg",
+            meta=Decimal("10.00"),
+            estoque_atual=Decimal("12.00"),
+            consumo_mes=Decimal("5.00"),
+        )
+
+        resultado = calcular_quantidade_compra(ingrediente)
+
+        self.assertLessEqual(resultado, Decimal("0.00"))
